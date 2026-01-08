@@ -5,7 +5,7 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
-    "build": "vite build --base=/drivon-eye.blog/",
+    "build": "vite build --base=/drivon-eye/",
     "preview": "vite preview"
   },
   "devDependencies": {

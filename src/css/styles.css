@@ -641,3 +641,283 @@ img {
         grid-column: span 1;
     }
 }
+/* --- INNOVATIONS SECTION --- */
+.innovations {
+    padding: 140px 0;
+    background: linear-gradient(to bottom, var(--color-dark), #050608);
+    /* Более глубокий темный фон */
+    position: relative;
+    overflow: hidden;
+}
+
+/* Фоновый свет */
+.innovations::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 60%;
+    height: 100%;
+    background: radial-gradient(circle at center, rgba(0, 122, 255, 0.08) 0%, transparent 60%);
+    pointer-events: none;
+}
+
+.innovations__grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 60px;
+    align-items: center;
+}
+
+.badge--glow {
+    box-shadow: 0 0 20px rgba(0, 122, 255, 0.3);
+    border-color: var(--color-accent);
+}
+
+.innovations__title {
+    font-family: var(--font-heading);
+    font-size: clamp(36px, 5vw, 72px);
+    line-height: 1.05;
+    text-transform: uppercase;
+    margin-bottom: 30px;
+}
+
+.innovations__text {
+    color: var(--color-gray);
+    font-size: 18px;
+    margin-bottom: 40px;
+    max-width: 500px;
+}
+
+.innovations__list {
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+}
+
+.innovations__list li {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    font-weight: 500;
+    color: var(--color-light);
+}
+
+.innovations__list i {
+    color: var(--color-accent);
+    filter: drop-shadow(0 0 8px var(--color-accent));
+}
+
+/* --- Tech Core Visualization (CSS Animation) --- */
+.innovations__visual {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 500px;
+    position: relative;
+}
+
+.tech-core {
+    position: relative;
+    width: 300px;
+    height: 300px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.tech-core__inner {
+    width: 120px;
+    height: 120px;
+    background: var(--color-accent);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 2;
+    box-shadow: 0 0 60px rgba(0, 122, 255, 0.6);
+    animation: corePulse 4s ease-in-out infinite;
+}
+
+.tech-core__icon {
+    width: 60px;
+    height: 60px;
+    color: white;
+}
+
+.tech-core__glow {
+    position: absolute;
+    width: 200%;
+    height: 200%;
+    background: radial-gradient(circle, rgba(0, 122, 255, 0.2) 0%, transparent 70%);
+    opacity: 0.5;
+}
+
+.tech-core__ring {
+    position: absolute;
+    width: 220px;
+    height: 220px;
+    border: 2px solid rgba(0, 122, 255, 0.3);
+    border-radius: 50%;
+    animation: ringRotate 10s linear infinite;
+}
+
+.tech-core__ring--2 {
+    width: 280px;
+    height: 280px;
+    border-color: rgba(0, 122, 255, 0.15);
+    border-style: dashed;
+    animation: ringRotate 15s linear infinite reverse;
+}
+
+@keyframes corePulse {
+
+    0%,
+    100% {
+        transform: scale(1);
+        box-shadow: 0 0 60px rgba(0, 122, 255, 0.6);
+    }
+
+    50% {
+        transform: scale(1.05);
+        box-shadow: 0 0 100px rgba(0, 122, 255, 0.8);
+    }
+}
+
+@keyframes ringRotate {
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+@media (max-width: 1024px) {
+    .innovations__grid {
+        grid-template-columns: 1fr;
+        text-align: center;
+    }
+
+    .innovations__text,
+    .innovations__list {
+        margin-left: auto;
+        margin-right: auto;
+    }
+
+    .innovations__list {
+        align-items: center;
+        /* Центрируем список на мобильных */
+    }
+
+    .innovations__visual {
+        height: 400px;
+        margin-top: 40px;
+    }
+}
+/* --- BLOG SECTION --- */
+.blog {
+    padding: 100px 0;
+}
+
+.blog__header {
+    margin-bottom: 60px;
+}
+
+.blog__title {
+    font-family: var(--font-heading);
+    font-size: clamp(32px, 5vw, 64px);
+    line-height: 1.1;
+    text-transform: uppercase;
+    margin-bottom: 20px;
+}
+
+.blog__description {
+    color: var(--color-gray);
+    font-size: 18px;
+    max-width: 600px;
+}
+
+.blog__feed {
+    display: flex;
+    flex-direction: column;
+    border-top: 1px solid var(--color-border);
+}
+
+.insight-card {
+    padding: 40px 0;
+    border-bottom: 1px solid var(--color-border);
+    display: grid;
+    grid-template-columns: 1fr 2fr 1fr;
+    gap: 40px;
+    align-items: center;
+    transition: var(--transition);
+}
+
+.insight-card:hover {
+    background: rgba(255, 255, 255, 0.02);
+    padding-left: 20px;
+    padding-right: 20px;
+}
+
+.insight-card__meta {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.insight-card__date {
+    color: var(--color-gray);
+    font-size: 14px;
+}
+
+.insight-card__category {
+    color: var(--color-accent);
+    font-size: 12px;
+    font-weight: 700;
+    text-transform: uppercase;
+}
+
+.insight-card__title {
+    font-family: var(--font-heading);
+    font-size: 24px;
+    line-height: 1.3;
+}
+
+.insight-card__excerpt {
+    color: var(--color-gray);
+    font-size: 15px;
+}
+
+.insight-card__link {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    justify-self: end;
+    font-weight: 600;
+    color: var(--color-light);
+    opacity: 0;
+    transform: translateX(-20px);
+    transition: var(--transition);
+}
+
+.insight-card:hover .insight-card__link {
+    opacity: 1;
+    transform: translateX(0);
+}
+
+.blog__footer {
+    margin-top: 60px;
+    text-align: center;
+}
+
+@media (max-width: 1024px) {
+    .insight-card {
+        grid-template-columns: 1fr;
+        gap: 20px;
+        text-align: left;
+    }
+
+    .insight-card__link {
+        justify-self: start;
+        opacity: 1;
+        transform: none;
+    }
+}

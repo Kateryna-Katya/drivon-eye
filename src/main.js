@@ -90,4 +90,28 @@ gsap.from('.bento-reveal', {
     stagger: 0.15,
     ease: "expo.out"
 });
+    // Плавное появление элементов секции инноваций
+gsap.from('.flow-reveal', {
+    scrollTrigger: {
+        trigger: '.innovations',
+        start: 'top 75%',
+    },
+    opacity: 0,
+    x: -30,
+    duration: 1,
+    stagger: 0.3,
+    ease: "power3.out"
+});
+    // Анимация появления списка блога
+gsap.from('.blog-reveal', {
+    scrollTrigger: {
+        trigger: '.blog__feed',
+        start: 'top 85%',
+    },
+    opacity: 0,
+    x: -50,
+    duration: 0.8,
+    stagger: 0.2,
+    ease: "power2.out"
+});
 });
