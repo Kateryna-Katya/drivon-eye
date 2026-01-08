@@ -1134,6 +1134,66 @@ img {
     transform: scaleX(0);
 }
 
-.menu-toggle.is-active .menu-toggle__line:nth-child(1) {
-    /* коррекция для 2 линий */
+
+/* --- STYLES FOR LEGAL PAGES --- */
+.pages {
+    padding: 160px 0 100px;
+    min-height: 80vh;
+}
+
+.pages h1 {
+    font-family: var(--font-heading);
+    font-size: clamp(26px, 5vw, 48px);
+    text-transform: uppercase;
+    margin-bottom: 40px;
+    color: var(--color-accent);
+}
+
+.pages h2 {
+    font-family: var(--font-heading);
+    font-size: 24px;
+    margin: 40px 0 20px;
+    color: var(--color-light);
+    text-transform: uppercase;
+}
+
+.pages p {
+    font-size: 16px;
+    line-height: 1.8;
+    color: var(--color-gray);
+    margin-bottom: 20px;
+}
+
+.pages ul {
+    margin-bottom: 30px;
+    padding-left: 20px;
+}
+
+.pages ul li {
+    list-style: disc;
+    color: var(--color-gray);
+    margin-bottom: 12px;
+    line-height: 1.6;
+}
+
+.pages strong {
+    color: var(--color-light);
+    font-weight: 600;
+}
+
+/* Ссылка возврата на главную */
+.pages-back {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 30px;
+    color: var(--color-accent);
+    font-weight: 500;
+    font-size: 14px;
+}
+
+@media (max-width: 768px) {
+    .pages {
+        padding: 120px 0 60px;
+    }
 }
