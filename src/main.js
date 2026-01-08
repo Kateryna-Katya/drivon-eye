@@ -1,182 +1,132 @@
 document.addEventListener('DOMContentLoaded', () => {
-    // Инициализация иконок Lucide
+    // 1. ИНИЦИАЛИЗАЦИЯ БИБЛИОТЕК
     lucide.createIcons();
+    gsap.registerPlugin(ScrollTrigger);
 
-    // Смена фона хедера при скролле
-    const header = document.querySelector('.header');
-    window.addEventListener('scroll', () => {
-        if (window.scrollY > 50) {
-            header.style.padding = '14px 0';
-            header.style.backgroundColor = 'rgba(15, 17, 21, 0.95)';
-        } else {
-            header.style.padding = '20px 0';
-            header.style.backgroundColor = 'rgba(15, 17, 21, 0.8)';
-        }
-    });
-
-    // Мобильное меню (заготовка)
+    // 2. МОБИЛЬНОЕ МЕНЮ (Исправленная логика)
     const menuToggle = document.querySelector('.menu-toggle');
-    menuToggle.addEventListener('click', () => {
-        // Логика будет расширена при необходимости
-        console.log('Mobile menu toggled');
-    });
-    // Функция ротации текста
-function initTextRotation() {
-    const rotateElements = document.querySelectorAll('.text-rotate');
+    const menuOverlay = document.getElementById('menu-overlay');
+    const mobileLinks = document.querySelectorAll('.mobile-nav__link');
 
-    rotateElements.forEach(el => {
-        const words = el.getAttribute('data-words').split(', ');
-        let currentIndex = 0;
+    if (menuToggle && menuOverlay) {
+        const toggleMenu = () => {
+            menuToggle.classList.toggle('is-active');
+            menuOverlay.classList.toggle('is-active');
+            document.body.style.overflow = menuOverlay.classList.contains('is-active') ? 'hidden' : '';
+        };
 
-        setInterval(() => {
-            const nextIndex = (currentIndex + 1) % words.length;
-            
-            // Анимация ухода текущего слова и появления нового
-            gsap.to(el, {
-                y: -20,
-                opacity: 0,
-                duration: 0.4,
-                onComplete: () => {
-                    el.textContent = words[nextIndex];
-                    gsap.fromTo(el, 
-                        { y: 20, opacity: 0 }, 
-                        { y: 0, opacity: 1, duration: 0.4 }
-                    );
-                    currentIndex = nextIndex;
-                }
-            });
-        }, 3000); // Интервал 3 секунды
-    });
-}
+        menuToggle.addEventListener('click', (e) => {
+            e.stopPropagation();
+            toggleMenu();
+        });
 
-// Добавляем вызов функции в DOMContentLoaded
-document.addEventListener('DOMContentLoaded', () => {
-    initTextRotation();
-    
-    // Плавное появление элементов Hero
-    gsap.from('.fade-in', {
-        opacity: 0,
-        y: 30,
-        duration: 1,
-        stagger: 0.2,
-        ease: "power2.out"
-    });
-});
-    // Внутри DOMContentLoaded
-gsap.registerPlugin(ScrollTrigger);
-
-// Анимация появления карточек при скролле
-gsap.from('.scroll-reveal', {
-    scrollTrigger: {
-        trigger: '.about__grid',
-        start: 'top 80%', // Анимация начнется, когда верх сетки будет на 80% высоты экрана
-    },
-    opacity: 0,
-    y: 50,
-    duration: 0.8,
-    stagger: 0.2, // Появление по очереди
-    ease: "power2.out"
-});
-    // Анимация появления Bento-сетки
-gsap.from('.bento-reveal', {
-    scrollTrigger: {
-        trigger: '.features__grid',
-        start: 'top 80%',
-    },
-    opacity: 0,
-    scale: 0.9,
-    y: 30,
-    duration: 0.8,
-    stagger: 0.15,
-    ease: "expo.out"
-});
-    // Плавное появление элементов секции инноваций
-gsap.from('.flow-reveal', {
-    scrollTrigger: {
-        trigger: '.innovations',
-        start: 'top 75%',
-    },
-    opacity: 0,
-    x: -30,
-    duration: 1,
-    stagger: 0.3,
-    ease: "power3.out"
-});
-    // Анимация появления списка блога
-gsap.from('.blog-reveal', {
-    scrollTrigger: {
-        trigger: '.blog__feed',
-        start: 'top 85%',
-    },
-    opacity: 0,
-    x: -50,
-    duration: 0.8,
-    stagger: 0.2,
-    ease: "power2.out"
-});
-    // Внутри DOMContentLoaded
-const form = document.getElementById('ajax-form');
-const phoneInput = document.getElementById('phone-input');
-const statusMsg = document.getElementById('form-status');
-const captchaTask = document.getElementById('captcha-task');
-const captchaInput = document.getElementById('captcha-input');
-
-// 1. Генерация капчи
-let num1 = Math.floor(Math.random() * 10);
-let num2 = Math.floor(Math.random() * 10);
-let captchaResult = num1 + num2;
-captchaTask.textContent = `${num1} + ${num2}`;
-
-// 2. Валидация телефона (только цифры)
-phoneInput.addEventListener('input', (e) => {
-    e.target.value = e.target.value.replace(/[^\d]/g, '');
-});
-
-// 3. Обработка формы
-form.addEventListener('submit', (e) => {
-    e.preventDefault();
-    
-    // Проверка капчи
-    if (parseInt(captchaInput.value) !== captchaResult) {
-        alert('Ошибка капчи! Попробуйте снова.');
-        return;
+        mobileLinks.forEach(link => {
+            link.addEventListener('click', toggleMenu);
+        });
     }
 
-    const submitBtn = form.querySelector('button');
-    submitBtn.disabled = true;
-    submitBtn.textContent = 'Отправка...';
+    // 3. УНИВЕРСАЛЬНАЯ РОТАЦИЯ ТЕКСТА (По всему проекту)
+    const initTextRotation = () => {
+        const rotateElements = document.querySelectorAll('.text-rotate');
+        rotateElements.forEach(el => {
+            const wordsAttr = el.getAttribute('data-words');
+            if (!wordsAttr) return;
 
-    // Имитация AJAX
-    setTimeout(() => {
-        form.reset();
-        submitBtn.disabled = false;
-        submitBtn.textContent = 'Отправить запрос';
+            const words = wordsAttr.split(', ');
+            let index = 0;
+
+            setInterval(() => {
+                const nextIndex = (index + 1) % words.length;
+                
+                const tl = gsap.timeline();
+                tl.to(el, {
+                    y: -10,
+                    opacity: 0,
+                    duration: 0.4,
+                    ease: "power2.in",
+                    onComplete: () => {
+                        el.textContent = words[nextIndex];
+                        index = nextIndex;
+                    }
+                })
+                .fromTo(el, 
+                    { y: 10, opacity: 0 }, 
+                    { y: 0, opacity: 1, duration: 0.4, ease: "power2.out" }
+                );
+            }, 3000);
+        });
+    };
+    initTextRotation();
+
+    // 4. НАДЕЖНАЯ ЛОГИКА ПОЯВЛЕНИЯ ЭЛЕМЕНТОВ (Scroll Reveal)
+    // Мы создаем отдельный триггер для каждого элемента, чтобы они подгружались корректно
+    const revealSelectors = [
+        '.fade-in', 
+        '.scroll-reveal', 
+        '.bento-reveal', 
+        '.flow-reveal', 
+        '.blog-reveal', 
+        '.contact-reveal'
+    ];
+
+    revealSelectors.forEach(selector => {
+        const elements = document.querySelectorAll(selector);
         
-        // Показываем сообщение об успехе
-        statusMsg.style.display = 'flex';
-        
-        // Обновляем капчу для следующего раза
-        num1 = Math.floor(Math.random() * 10);
-        num2 = Math.floor(Math.random() * 10);
-        captchaResult = num1 + num2;
-        captchaTask.textContent = `${num1} + ${num2}`;
+        elements.forEach((el, i) => {
+            gsap.from(el, {
+                scrollTrigger: {
+                    trigger: el,
+                    start: "top 90%", // Элемент начнет появляться, когда его верх на 90% высоты экрана
+                    toggleActions: "play none none none"
+                },
+                opacity: 0,
+                y: 30,
+                duration: 1,
+                ease: "expo.out",
+                delay: i % 3 * 0.1 // Небольшая задержка для элементов, идущих друг за другом
+            });
+        });
+    });
 
-        // Скрываем сообщение через 5 секунд
-        setTimeout(() => {
-            statusMsg.style.display = 'none';
-        }, 5000);
-    }, 1500);
-});
+    // 5. COOKIE POPUP
+    const cookiePopup = document.getElementById('cookie-popup');
+    const cookieAccept = document.getElementById('cookie-accept');
 
-// Анимация секции
-gsap.from('.contact-reveal', {
-    scrollTrigger: {
-        trigger: '.contact',
-        start: 'top 80%',
-    },
-    opacity: 0,
-    y: 30,
-    duration: 1,
-    stagger: 0.3
-});
+    if (cookiePopup && !localStorage.getItem('cookies-accepted')) {
+        gsap.to(cookiePopup, { 
+            display: 'block', 
+            opacity: 1, 
+            y: 0, 
+            delay: 2, 
+            duration: 0.8 
+        });
+    }
+
+    if (cookieAccept) {
+        cookieAccept.addEventListener('click', () => {
+            localStorage.setItem('cookies-accepted', 'true');
+            gsap.to(cookiePopup, { 
+                opacity: 0, 
+                y: 50, 
+                duration: 0.5, 
+                onComplete: () => cookiePopup.style.display = 'none' 
+            });
+        });
+    }
+
+    // 6. ВАЛИДАЦИЯ ФОРМЫ
+    const contactForm = document.getElementById('ajax-form');
+    if (contactForm) {
+        const phoneInput = document.getElementById('phone-input');
+        if (phoneInput) {
+            phoneInput.addEventListener('input', (e) => {
+                e.target.value = e.target.value.replace(/[^\d]/g, '');
+            });
+        }
+    }
+
+    // 7. ОБНОВЛЕНИЕ SCROLLTRIGGER (Важно для корректных расчетов)
+    window.addEventListener('load', () => {
+        ScrollTrigger.refresh();
+    });
 });
