@@ -228,3 +228,65 @@
     </div>
     </div>
 </section>
+<section class="contact" id="contact">
+    <div class="container">
+        <div class="contact__grid">
+            <div class="contact__info contact-reveal">
+                <h2 class="contact__title">
+                    Связаться с нами — это <br>
+                    <span class="text-rotate" data-words="Просто, Быстро, Надежно, Правильно">Просто</span>
+                </h2>
+                <p class="contact__lead">
+                    Готовы расширить горизонты проекта? Оставьте заявку на бесплатную консультацию. Наш эксперт свяжется
+                    с вами в течение 24 часов.
+                </p>
+
+                <div class="contact__details">
+                    <div class="contact__item">
+                        <strong>Офис в Милане:</strong>
+                        <p>Via Dante, 17, 20121 Milano MI, Italy</p>
+                    </div>
+                    <div class="contact__item">
+                        <strong>Прямая линия:</strong>
+                        <p><a href="tel:+39021234567">+39 02 123 4567</a></p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="contact__form-wrapper contact-reveal">
+                <form class="contact__form" id="ajax-form">
+                    <div class="form-group">
+                        <input type="text" name="name" placeholder="Ваше имя" required class="form-input">
+                    </div>
+
+                    <div class="form-group">
+                        <input type="email" name="email" placeholder="Email" required class="form-input">
+                    </div>
+
+                    <div class="form-group">
+                        <input type="tel" name="phone" id="phone-input" placeholder="Телефон (только цифры)" required
+                            class="form-input">
+                    </div>
+
+                    <div class="form-captcha">
+                        <label for="captcha" class="captcha-label">Сколько будет <span id="captcha-task">5 +
+                                3</span>?</label>
+                        <input type="number" id="captcha-input" required class="form-input form-input--captcha">
+                    </div>
+
+                    <label class="form-checkbox">
+                        <input type="checkbox" required>
+                        <span class="checkbox-text">Я согласен на обработку персональных данных</span>
+                    </label>
+
+                    <button type="submit" class="btn btn--primary btn--full">Отправить запрос</button>
+
+                    <div class="form-status" id="form-status">
+                        <i data-lucide="check-circle"></i>
+                        <span>Запрос успешно отправлен! Мы скоро свяжемся с вами.</span>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</section>

@@ -114,4 +114,69 @@ gsap.from('.blog-reveal', {
     stagger: 0.2,
     ease: "power2.out"
 });
+    // Внутри DOMContentLoaded
+const form = document.getElementById('ajax-form');
+const phoneInput = document.getElementById('phone-input');
+const statusMsg = document.getElementById('form-status');
+const captchaTask = document.getElementById('captcha-task');
+const captchaInput = document.getElementById('captcha-input');
+
+// 1. Генерация капчи
+let num1 = Math.floor(Math.random() * 10);
+let num2 = Math.floor(Math.random() * 10);
+let captchaResult = num1 + num2;
+captchaTask.textContent = `${num1} + ${num2}`;
+
+// 2. Валидация телефона (только цифры)
+phoneInput.addEventListener('input', (e) => {
+    e.target.value = e.target.value.replace(/[^\d]/g, '');
+});
+
+// 3. Обработка формы
+form.addEventListener('submit', (e) => {
+    e.preventDefault();
+    
+    // Проверка капчи
+    if (parseInt(captchaInput.value) !== captchaResult) {
+        alert('Ошибка капчи! Попробуйте снова.');
+        return;
+    }
+
+    const submitBtn = form.querySelector('button');
+    submitBtn.disabled = true;
+    submitBtn.textContent = 'Отправка...';
+
+    // Имитация AJAX
+    setTimeout(() => {
+        form.reset();
+        submitBtn.disabled = false;
+        submitBtn.textContent = 'Отправить запрос';
+        
+        // Показываем сообщение об успехе
+        statusMsg.style.display = 'flex';
+        
+        // Обновляем капчу для следующего раза
+        num1 = Math.floor(Math.random() * 10);
+        num2 = Math.floor(Math.random() * 10);
+        captchaResult = num1 + num2;
+        captchaTask.textContent = `${num1} + ${num2}`;
+
+        // Скрываем сообщение через 5 секунд
+        setTimeout(() => {
+            statusMsg.style.display = 'none';
+        }, 5000);
+    }, 1500);
+});
+
+// Анимация секции
+gsap.from('.contact-reveal', {
+    scrollTrigger: {
+        trigger: '.contact',
+        start: 'top 80%',
+    },
+    opacity: 0,
+    y: 30,
+    duration: 1,
+    stagger: 0.3
+});
 });
