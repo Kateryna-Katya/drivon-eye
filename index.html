@@ -1,34 +1,50 @@
 <!DOCTYPE html>
-<html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <link rel="icon" type="image/svg+xml" href="/drivon-eye.blog/favicon.svg" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Vanilla App Template</title>
+<html lang="ru">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Drivon Eye — Экспертный консалтинг и инновации</title>
+  <meta name="description" content="Консалтинг-платформа нового поколения: стратегии роста и цифровые решения.">
+
+  <link rel="icon" href="img/favicon.svg" type="image/svg+xml">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Syne:wght@700;800&display=swap"
+    rel="stylesheet">
+
+  <script src="https://unpkg.com/lucide@latest"></script>
     <script type="module" crossorigin src="/drivon-eye.blog/index.js"></script>
-    <link rel="stylesheet" crossorigin href="/drivon-eye.blog/assets/styles-guStct1H.css">
+    <link rel="stylesheet" crossorigin href="/drivon-eye.blog/assets/styles-CIQQca7R.css">
   </head>
   <body>
     <header class="header">
-  <div class="container">
-    <nav class="nav">
-      <a class="nav-logo" href="./index.html" aria-label="Site logo">
-        <svg class="nav-logo-icon" width="100" height="30">
-          <use href="{=$icon-path}"></use>
-        </svg>
-      </a>
-      <ul class="nav-list">
-        <li class="nav-item">
-          <a class="nav-link {=$highlight-act}" href="./page-2.html">Page 2</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link {=$highlight-curr}" href="./page-3.html">Page 3</a>
-        </li>
+  <div class="container header__container">
+    <a href="/" class="logo">
+      <span class="logo__dot"></span>
+      <span class="logo__text">Drivon Eye</span>
+    </a>
+
+    <nav class="nav" id="nav">
+      <ul class="nav__list">
+        <li><a href="#hero" class="nav__link">Главная</a></li>
+        <li><a href="#about" class="nav__link">Платформа</a></li>
+        <li><a href="#features" class="nav__link">Преимущества</a></li>
+        <li><a href="#innovations" class="nav__link">Инновации</a></li>
+        <li><a href="#blog" class="nav__link">Блог</a></li>
       </ul>
     </nav>
+
+    <div class="header__actions">
+      <a href="#contact" class="btn btn--outline btn--sm">Связаться</a>
+      <button class="menu-toggle" aria-label="Открыть меню">
+        <span class="menu-toggle__line"></span>
+        <span class="menu-toggle__line"></span>
+      </button>
+    </div>
   </div>
 </header>
-
 
     <main>
       <!-- Loads the specified .html file -->
@@ -37,20 +53,63 @@
 
     <footer class="footer">
   <div class="container">
-    <p class="footer-desc">
-      Made with ✨ by
-      <a
-        class="footer-link"
-        href="https://goit.global/ua/"
-        target="_blank"
-        rel="noopener noreferrer"
-      >
-        GoIT team
-      </a>
-    </p>
+    <div class="footer__grid">
+      <div class="footer__col">
+        <a href="/" class="logo footer__logo">
+          <span class="logo__dot"></span>
+          <span class="logo__text">Drivon Eye</span>
+        </a>
+        <p class="footer__description">
+          Переосмыслите подход к развитию вашего бизнеса с помощью передовой цифровой инфраструктуры и AI-инструментов.
+        </p>
+      </div>
+
+      <div class="footer__col">
+        <h4 class="footer__title">Навигация</h4>
+        <ul class="footer__links">
+          <li><a href="#hero">Главная</a></li>
+          <li><a href="#about">О платформе</a></li>
+          <li><a href="#innovations">Инновации</a></li>
+          <li><a href="#blog">Образование</a></li>
+        </ul>
+      </div>
+
+      <div class="footer__col">
+        <h4 class="footer__title">Юридическая информация</h4>
+        <ul class="footer__links">
+          <li><a href="privacy.html">Политика конфиденциальности</a></li>
+          <li><a href="cookies.html">Файлы Cookie</a></li>
+          <li><a href="terms.html">Условия использования</a></li>
+          <li><a href="return.html">Возврат средств</a></li>
+          <li><a href="disclaimer.html">Отказ от ответственности</a></li>
+          <li><a href="personal-data-policy.html">Персональные данные</a></li>
+        </ul>
+      </div>
+
+      <div class="footer__col">
+        <h4 class="footer__title">Контакты</h4>
+        <ul class="footer__contact-list">
+          <li>
+            <i data-lucide="phone" class="footer__icon"></i>
+            <a href="tel:+39021234567">+39 02 123 4567</a>
+          </li>
+          <li>
+            <i data-lucide="mail" class="footer__icon"></i>
+            <a href="mailto:hello@drivon-eye.blog">hello@drivon-eye.blog</a>
+          </li>
+          <li>
+            <i data-lucide="map-pin" class="footer__icon"></i>
+            <span>Via Dante, 17, 20121 Milano MI, Italy</span>
+          </li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="footer__bottom">
+      <p>&copy; 2026 Drivon Eye. Все права защищены. Предложение активно только в странах ЕС.</p>
+    </div>
   </div>
 </footer>
-
 
   </body>
 </html>
