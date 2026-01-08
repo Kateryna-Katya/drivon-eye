@@ -373,3 +373,109 @@ img {
         min-width: auto;
     }
 }
+/* --- ABOUT SECTION --- */
+.about {
+    padding: 120px 0;
+    position: relative;
+}
+
+.about__header {
+    max-width: 800px;
+    margin-bottom: 80px;
+}
+
+.about__title {
+    font-family: var(--font-heading);
+    font-size: clamp(32px, 5vw, 64px);
+    line-height: 1.1;
+    text-transform: uppercase;
+    margin-bottom: 30px;
+}
+
+.about__lead {
+    font-size: 20px;
+    color: var(--color-gray);
+    line-height: 1.5;
+}
+
+.about__grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 30px;
+}
+
+.about-card {
+    padding: 40px;
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid var(--color-border);
+    border-radius: 32px;
+    transition: var(--transition);
+    position: relative;
+    overflow: hidden;
+}
+
+.about-card:hover {
+    background: rgba(255, 255, 255, 0.05);
+    border-color: var(--color-accent);
+    transform: translateY(-10px);
+}
+
+.about-card__icon {
+    width: 60px;
+    height: 60px;
+    background: rgba(0, 122, 255, 0.1);
+    border-radius: 16px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--color-accent);
+    margin-bottom: 24px;
+}
+
+.about-card__icon i {
+    width: 28px;
+    height: 28px;
+}
+
+.about-card__title {
+    font-family: var(--font-heading);
+    font-size: 22px;
+    margin-bottom: 16px;
+    color: var(--color-light);
+}
+
+.about-card__text {
+    color: var(--color-gray);
+    font-size: 16px;
+    line-height: 1.6;
+}
+
+/* Эффект свечения при наведении на карточку */
+.about-card::after {
+    content: '';
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: radial-gradient(circle, rgba(0, 122, 255, 0.1) 0%, transparent 70%);
+    opacity: 0;
+    transition: var(--transition);
+    pointer-events: none;
+}
+
+.about-card:hover::after {
+    opacity: 1;
+}
+
+@media (max-width: 1024px) {
+    .about__grid {
+        grid-template-columns: 1fr;
+    }
+
+    .about__header {
+        text-align: center;
+        margin-left: auto;
+        margin-right: auto;
+    }
+}

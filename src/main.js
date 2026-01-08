@@ -62,4 +62,19 @@ document.addEventListener('DOMContentLoaded', () => {
         ease: "power2.out"
     });
 });
+    // Внутри DOMContentLoaded
+gsap.registerPlugin(ScrollTrigger);
+
+// Анимация появления карточек при скролле
+gsap.from('.scroll-reveal', {
+    scrollTrigger: {
+        trigger: '.about__grid',
+        start: 'top 80%', // Анимация начнется, когда верх сетки будет на 80% высоты экрана
+    },
+    opacity: 0,
+    y: 50,
+    duration: 0.8,
+    stagger: 0.2, // Появление по очереди
+    ease: "power2.out"
+});
 });
