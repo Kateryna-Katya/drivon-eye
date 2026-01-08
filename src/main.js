@@ -77,4 +77,17 @@ gsap.from('.scroll-reveal', {
     stagger: 0.2, // Появление по очереди
     ease: "power2.out"
 });
+    // Анимация появления Bento-сетки
+gsap.from('.bento-reveal', {
+    scrollTrigger: {
+        trigger: '.features__grid',
+        start: 'top 80%',
+    },
+    opacity: 0,
+    scale: 0.9,
+    y: 30,
+    duration: 0.8,
+    stagger: 0.15,
+    ease: "expo.out"
+});
 });
