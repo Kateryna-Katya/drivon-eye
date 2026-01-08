@@ -20,4 +20,46 @@ document.addEventListener('DOMContentLoaded', () => {
         // Логика будет расширена при необходимости
         console.log('Mobile menu toggled');
     });
+    // Функция ротации текста
+function initTextRotation() {
+    const rotateElements = document.querySelectorAll('.text-rotate');
+
+    rotateElements.forEach(el => {
+        const words = el.getAttribute('data-words').split(', ');
+        let currentIndex = 0;
+
+        setInterval(() => {
+            const nextIndex = (currentIndex + 1) % words.length;
+            
+            // Анимация ухода текущего слова и появления нового
+            gsap.to(el, {
+                y: -20,
+                opacity: 0,
+                duration: 0.4,
+                onComplete: () => {
+                    el.textContent = words[nextIndex];
+                    gsap.fromTo(el, 
+                        { y: 20, opacity: 0 }, 
+                        { y: 0, opacity: 1, duration: 0.4 }
+                    );
+                    currentIndex = nextIndex;
+                }
+            });
+        }, 3000); // Интервал 3 секунды
+    });
+}
+
+// Добавляем вызов функции в DOMContentLoaded
+document.addEventListener('DOMContentLoaded', () => {
+    initTextRotation();
+    
+    // Плавное появление элементов Hero
+    gsap.from('.fade-in', {
+        opacity: 0,
+        y: 30,
+        duration: 1,
+        stagger: 0.2,
+        ease: "power2.out"
+    });
+});
 });
